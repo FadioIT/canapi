@@ -1,0 +1,20 @@
+{
+  "name": "canapi",
+  "version": "0.1.0",
+  "private": true,
+  "gypfile": true,
+  "main": "index.js",
+  "devDependencies": {
+    "dotenv": "^6.2.0",
+    "node-gyp": "^3.8.0"
+  },
+  "dependencies": {
+    "bindings": "^1.4.0",
+    "node-addon-api": "^1.6.2"
+  },
+  "scripts": {
+    "build": "node-gyp rebuild -j 8 -C addon",
+    "clean": "node-gyp clean",
+    "pkg": "npx pkg -t node10-win bench.js"
+  }
+}
