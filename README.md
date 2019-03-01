@@ -25,7 +25,7 @@ Check `.env` file and update configuration.
 
 ### Run
 
-Run `node bench.js`.
+Run `node bench/run.js`.
 
 Expected output:
 

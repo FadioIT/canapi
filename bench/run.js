@@ -1,8 +1,9 @@
-require("dotenv").config();
+const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, ".env") });
 
-CanApi = require("./index");
-delay = require("./helpers/delay");
-log = require("./helpers/log");
+CanApi = require("../index");
+delay = require("./delay");
+log = require("./log");
 
 (async () => {
   log("## OPEN CHANNEL " + parseInt(process.env.LED_CHANNEL, 10) + " ##");
