@@ -1,56 +1,78 @@
-# canapi
+<p align="center">
+    <img height="141" width="300" src="https://github.com/FadioIT/canapi/blob/master/logo.png?raw=true" />
+    <br/>
+    <br/>
+    <br/>
+</p>
 
-## Installation
+Kvaser CanLib implementation for Node.js.
+**Works on Windows only** (mocked for MacOS and Linux).
+
+## Requirements
 
 1. Install all the required tools and configurations using Microsoft's [windows-build-tools](https://github.com/felixrieseberg/windows-build-tools). Open your terminal as an Administrator and type following `npm install -g windows-build-tools@4.0.0`.
 
 2. Install [Kvaser Drivers for Windows](https://www.kvaser.com/download/).
 
-3. Open new terminal
+## Usage
 
-4. Go to the root of the **canapi** directory and run `yarn install` for installing the dependencies.
+First at all you need to create a `CanApi` instance with the number of the channel.
 
-## Test bench
+```js
+const myChannel = new CanApi(0);
+```
 
-### Configure environnement variables
+### .open()
 
-Check `.env` file and update configuration.
+Open the CAN channel.
 
-|Name|Default|Description|
-|----|-------|-----------|
-|LED_CHANNEL|`0`|The number of the channel.|
-|LED_ACTION_DELAY|`3000`|Delay between actions.|
-|LED_SEAT_IDENTIFIER|`731`|CAN identifier of the seat.|
-|LED_WALL_IDENTIFIER|`734`|CAN identifier of the wall.|
+**Returns**: `bool`
 
-### Run
+### .close()
 
-Run `node bench/run.js`.
+Closes the CAN channel.
 
-Expected output:
+**Returns**: `bool`
 
-```bash
-## OPEN CHANNEL 0 ##
+### .sendMessage(identifier, data)
 
-## START SIMULATION ##
+Send message to the CAN channel.
 
-## SEAT BLINKING / FADING RED ##
+|Input param|Type|Description|
+|---|---|---|
+|`identifier`|`number`|the identifier of the CAN message to send|
+|`data`|`array`|the data buffer|
 
-## SEAT BLINKING / FADING PURPLE ##
+**Returns**: `bool`
 
-## WALL PERMANET COLOR ##
+**Example**:
 
-## WALL BLINKING / FADING ##
+```js
+myChannel.sendMessage(731, CanApi.createBuffer([
+  180, 20, 180, 2
+]));
+```
 
-## WALL WAVE 1 ##
+### .readMessage()
 
-## WALL WAVE 2 ##
+Read message from the CAN channel.
 
-## WALL PARAMETRIC ANIMATION 1 ##
+**Returns**: `Object`
 
-## WALL PARAMETRIC ANIMATION 2 ##
+|Output param|Type|Description|
+|---|---|---|
+|`Object.identifier`|`number`|the identifier of the CAN message to read|
+|`Object.data`|`buffer`|the data buffer|
+|`Object.dlc`|`number`|the length of the message in bytes|
 
-## WALL PARAMETRIC ANIMATION 3 ##
+**Example**:
 
-## STOP SIMULATION ##
+```js
+const message = myChannel.readMessage();
+
+console.log({
+  identifier: message.identifier,
+  data: Array.from(message.data),
+  dlc: message.dlc
+});
 ```
