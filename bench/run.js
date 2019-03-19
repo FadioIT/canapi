@@ -5,9 +5,11 @@ CanApi = require("../index");
 delay = require("./delay");
 log = require("./log");
 
+const bitRates = require("../helpers/bit_rates");
+
 (async () => {
   log("## OPEN CHANNEL " + parseInt(process.env.LED_CHANNEL, 10) + " ##");
-  const seatChannel = new CanApi(parseInt(process.env.LED_CHANNEL, 10));
+  const seatChannel = new CanApi(parseInt(process.env.LED_CHANNEL, 10), bitRates.canBITRATE_500K);
 
   log("## START SIMULATION ##");
   seatChannel.open();

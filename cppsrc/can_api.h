@@ -20,6 +20,7 @@ class CanApi : public Napi::ObjectWrap<CanApi> {
     Napi::Value Close(const Napi::CallbackInfo& info);
 
     int channel;
+    int canBitRate;
     canHandle handle;
     int opened = false;
 };
