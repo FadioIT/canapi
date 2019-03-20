@@ -5,7 +5,7 @@ CanApi = require("../index");
 delay = require("./delay");
 log = require("./log");
 
-const bitRates = require("../helpers/bit_rates");
+const bitRates = CanApi.bitRates;
 
 (async () => {
   log("## OPEN CHANNEL " + parseInt(process.env.LED_CHANNEL, 10) + " ##");

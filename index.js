@@ -37,5 +37,6 @@ const CanApiWrapper = function (channel, bitRate = bitRates.canBITRATE_500K) {
 };
 
 CanApiWrapper.createBuffer = createBuffer;
+CanApiWrapper.bitRates = bitRates;
 
 module.exports = CanApiWrapper;
