@@ -16,10 +16,27 @@ Kvaser CanLib implementation for Node.js.
 
 ## Usage
 
-First at all you need to create a `CanApi` instance with the number of the channel.
+First at all you need to create a `CanApi` instance with the number of the channel, and the bitrate of can message. 
+
+bitrate default : "canBITRATE_500k".
 
 ```js
-const myChannel = new CanApi(0);
+const bitRates = require("../helpers/bit_rates");
+/*
+const bitRates = {
+    canBITRATE_1M   : "canBITRATE_1M",
+    canBITRATE_500K : "canBITRATE_500K",
+    canBITRATE_250K : "canBITRATE_250K",
+    canBITRATE_125K : "canBITRATE_125K",
+    canBITRATE_100K : "canBITRATE_100K",
+    canBITRATE_62K  : "canBITRATE_62K",
+    canBITRATE_50K  : "canBITRATE_50K",
+    canBITRATE_83K  : "canBITRATE_83K",
+    canBITRATE_10K  : "canBITRATE_10K"
+}
+*/
+
+const myChannel = new CanApi(0, bitRates.canBITRATE_500K);
 ```
 
 ### .open()
