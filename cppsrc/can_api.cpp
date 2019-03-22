@@ -40,7 +40,19 @@ CanApi::CanApi(const Napi::CallbackInfo& info): Napi::ObjectWrap<CanApi>(info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
 
+  Napi::Object bitRates = Napi::Object::New(env);
+  bitRates.Set(Napi::String::New(env, "canBITRATE_1M"), canBITRATE_1M);
+  bitRates.Set(Napi::String::New(env, "canBITRATE_500K"), canBITRATE_500K);
+  bitRates.Set(Napi::String::New(env, "canBITRATE_250K"), canBITRATE_250K);
+  bitRates.Set(Napi::String::New(env, "canBITRATE_125K"), canBITRATE_125K);
+  bitRates.Set(Napi::String::New(env, "canBITRATE_100K"), canBITRATE_100K);
+  bitRates.Set(Napi::String::New(env, "canBITRATE_83K"), canBITRATE_83K);
+  bitRates.Set(Napi::String::New(env, "canBITRATE_62K"), canBITRATE_62K);
+  bitRates.Set(Napi::String::New(env, "canBITRATE_50K"), canBITRATE_50K);
+  bitRates.Set(Napi::String::New(env, "canBITRATE_10K"), canBITRATE_10K);
+
   this->channel = (int)info[0].As<Napi::Number>();
+  this->canBitRate = (int)bitRates.Get(info[1].As<Napi::String>()).As<Napi::Number>();
 
   canInitializeLibrary();
 }
@@ -87,7 +99,7 @@ Napi::Value CanApi::Open(const Napi::CallbackInfo& info) {
   this->handle = canOpenChannel(this->channel, canOPEN_ACCEPT_VIRTUAL);
   CanApi::CheckCanStatus("Constructor::canOpenChannel", (canStatus)this->handle);
   
-  status = canSetBusParams(this->handle, canBITRATE_250K, 0, 0, 0, 0, 0);
+  status = canSetBusParams(this->handle, this->canBitRate, 0, 0, 0, 0, 0);
   CanApi::CheckCanStatus("Constructor::canSetBusParams", status);
 
   status = canBusOn(this->handle);

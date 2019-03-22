@@ -7,9 +7,10 @@ if (isWinPlatfrom) {
 }
 
 const createBuffer = require("./helpers/create_buffer");
+const bitRates = require("./helpers/bit_rates");
 
-const CanApiWrapper = function (channel) {
-  const CanApiInstance = new CanApi(channel);
+const CanApiWrapper = function (channel, bitRate = bitRates.canBITRATE_500K) {
+  const CanApiInstance = new CanApi(channel, bitRate);
 
   const ifWinPlatformExecute = (propertyName, defaultValue, ...args) => {
     if (isWinPlatfrom) {
@@ -36,5 +37,6 @@ const CanApiWrapper = function (channel) {
 };
 
 CanApiWrapper.createBuffer = createBuffer;
+CanApiWrapper.bitRates = bitRates;
 
 module.exports = CanApiWrapper;

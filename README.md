@@ -16,10 +16,14 @@ Kvaser CanLib implementation for Node.js.
 
 ## Usage
 
-First at all you need to create a `CanApi` instance with the number of the channel.
+First at all you need to create a `CanApi` instance with the number of the channel, and the bitrate of can message.
+
+bitrate default : `canBITRATE_500k`.
 
 ```js
-const myChannel = new CanApi(0);
+const CanApi = require("canapi");
+
+const myChannel = new CanApi(0, CanApi.bitRates.canBITRATE_500K);
 ```
 
 ### .open()
@@ -38,19 +42,17 @@ Closes the CAN channel.
 
 Send message to the CAN channel.
 
-|Input param|Type|Description|
-|---|---|---|
-|`identifier`|`number`|the identifier of the CAN message to send|
-|`data`|`array`|the data buffer|
+| Input param  | Type     | Description                               |
+| ------------ | -------- | ----------------------------------------- |
+| `identifier` | `number` | the identifier of the CAN message to send |
+| `data`       | `array`  | the data buffer                           |
 
 **Returns**: `bool`
 
 **Example**:
 
 ```js
-myChannel.sendMessage(731, CanApi.createBuffer([
-  180, 20, 180, 2
-]));
+myChannel.sendMessage(731, CanApi.createBuffer([180, 20, 180, 2]));
 ```
 
 ### .readMessage()
@@ -59,11 +61,11 @@ Read message from the CAN channel.
 
 **Returns**: `Object`
 
-|Output param|Type|Description|
-|---|---|---|
-|`Object.identifier`|`number`|the identifier of the CAN message to read|
-|`Object.data`|`buffer`|the data buffer|
-|`Object.dlc`|`number`|the length of the message in bytes|
+| Output param        | Type     | Description                               |
+| ------------------- | -------- | ----------------------------------------- |
+| `Object.identifier` | `number` | the identifier of the CAN message to read |
+| `Object.data`       | `buffer` | the data buffer                           |
+| `Object.dlc`        | `number` | the length of the message in bytes        |
 
 **Example**:
 
@@ -76,3 +78,37 @@ console.log({
   dlc: message.dlc
 });
 ```
+
+## Helpers
+
+### CanApi.createBuffer()
+
+Allows you to create buffer from JavaScript array.
+
+| Input param | Type    | Description     |
+| ----------- | ------- | --------------- |
+| `data`      | `array` | the data buffer |
+
+**Returns**: `Uint8Array`
+
+**Example**:
+
+```js
+CanApi.createBuffer([180, 20, 180, 2]);
+```
+
+### CanApi.bitRates
+
+List all of the bit rates.
+
+| Name              |
+| ----------------- |
+| `canBITRATE_1M`   |
+| `canBITRATE_500K` |
+| `canBITRATE_250K` |
+| `canBITRATE_125K` |
+| `canBITRATE_100K` |
+| `canBITRATE_62K`  |
+| `canBITRATE_50K`  |
+| `canBITRATE_83K`  |
+| `canBITRATE_10K`  |
