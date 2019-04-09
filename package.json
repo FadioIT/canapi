@@ -1,5 +1,5 @@
 {
-  "name": "canapi",
+  "name": "@fadioit/canapi",
   "version": "0.1.0",
   "private": true,
   "gypfile": true,
