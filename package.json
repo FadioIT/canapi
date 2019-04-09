@@ -1,7 +1,6 @@
 {
   "name": "@fadioit/canapi",
   "version": "0.1.0",
-  "private": true,
   "gypfile": true,
   "main": "index.js",
   "devDependencies": {
