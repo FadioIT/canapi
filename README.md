@@ -46,13 +46,14 @@ Send message to the CAN channel.
 | ------------ | -------- | ----------------------------------------- |
 | `identifier` | `number` | the identifier of the CAN message to send |
 | `data`       | `array`  | the data buffer                           |
+| `dlc`        | `number` | the length of the message in bytes        |
 
 **Returns**: `bool`
 
 **Example**:
 
 ```js
-myChannel.sendMessage(731, CanApi.createBuffer([180, 20, 180, 2]));
+myChannel.sendMessage(731, CanApi.createBuffer([180, 20, 180, 2]), 4);
 ```
 
 ### .readMessage()

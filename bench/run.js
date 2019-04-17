@@ -22,7 +22,8 @@ const bitRates = CanApi.bitRates;
       0, // byte 2 - amount of green color
       0, // byte 3 - amount of blue color
       1 // byte 4 - blinkspeed
-    ])
+    ]),
+    4
   );
 
   await delay(parseInt(process.env.LED_ACTION_DELAY, 10));
@@ -35,7 +36,8 @@ const bitRates = CanApi.bitRates;
       20, // byte 2 - amount of green color
       180, // byte 3 - amount of blue color
       2 // byte 4 - blinkspeed
-    ])
+    ]),
+    4
   );
 
   await delay(parseInt(process.env.LED_ACTION_DELAY, 10));
@@ -52,7 +54,8 @@ const bitRates = CanApi.bitRates;
       0, // byte 6 - control the wall when blinkspeed is equal to 255
       0, // byte 7 - control the wall when blinkspeed is equal to 255
       0 // byte 8 - control the wall when blinkspeed is equal to 255
-    ])
+    ]),
+    8
   );
 
   await delay(parseInt(process.env.LED_ACTION_DELAY, 10));
@@ -69,7 +72,8 @@ const bitRates = CanApi.bitRates;
       0, // byte 6 - control the wall when blinkspeed is equal to 255
       0, // byte 7 - control the wall when blinkspeed is equal to 255
       0 // byte 8 - control the wall when blinkspeed is equal to 255
-    ])
+    ]),
+    8
   );
 
   await delay(parseInt(process.env.LED_ACTION_DELAY, 10));
@@ -86,7 +90,8 @@ const bitRates = CanApi.bitRates;
       0, // byte 6 - control the wall when blinkspeed is equal to 255
       20, // byte 7 - control the wall when blinkspeed is equal to 255
       0 // byte 8 - control the wall when blinkspeed is equal to 255
-    ])
+    ]),
+    8
   );
 
   await delay(parseInt(process.env.LED_ACTION_DELAY, 10));
@@ -103,7 +108,8 @@ const bitRates = CanApi.bitRates;
       0, // byte 6 - control the wall when blinkspeed is equal to 255
       10, // byte 7 - control the wall when blinkspeed is equal to 255
       0 // byte 8 - control the wall when blinkspeed is equal to 255
-    ])
+    ]),
+    8
   );
 
   await delay(parseInt(process.env.LED_ACTION_DELAY, 10));
@@ -120,7 +126,8 @@ const bitRates = CanApi.bitRates;
       1, // byte 6 - control the wall when blinkspeed is equal to 255
       20, // byte 7 - control the wall when blinkspeed is equal to 255
       0 // byte 8 - control the wall when blinkspeed is equal to 255
-    ])
+    ]),
+    8
   );
 
   await delay(parseInt(process.env.LED_ACTION_DELAY, 10));
@@ -137,7 +144,8 @@ const bitRates = CanApi.bitRates;
       0, // byte 6 - control the wall when blinkspeed is equal to 255
       30, // byte 7 - control the wall when blinkspeed is equal to 255
       0 // byte 8 - control the wall when blinkspeed is equal to 255
-    ])
+    ]),
+    8
   );
 
   await delay(parseInt(process.env.LED_ACTION_DELAY, 10));
@@ -154,7 +162,8 @@ const bitRates = CanApi.bitRates;
       1, // byte 6 - control the wall when blinkspeed is equal to 255
       10, // byte 7 - control the wall when blinkspeed is equal to 255
       0 // byte 8 - control the wall when blinkspeed is equal to 255
-    ])
+    ]),
+    8
   );
 
   await delay(parseInt(process.env.LED_ACTION_DELAY, 10));
