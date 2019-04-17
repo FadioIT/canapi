@@ -1,6 +1,7 @@
 {
   "name": "@fadioit/canapi",
-  "version": "0.1.0",
+  "description": "Kvaser CanLib implementation for Node.js (Windows only).",
+  "version": "1.0.0",
   "gypfile": true,
   "main": "index.js",
   "devDependencies": {
