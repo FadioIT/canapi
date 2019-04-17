@@ -64,7 +64,7 @@ Napi::Value CanApi::ReadMessage(const Napi::CallbackInfo& info) {
   long identifier;
   uint32_t  dlc;
   uint32_t flags;
-  uint8_t data[8];
+  uint8_t* data;
   DWORD time;
 
   status = canReadWait(this->handle, &identifier, data, &dlc, &flags, &time, 3000);
@@ -84,8 +84,9 @@ Napi::Value CanApi::SendMessage(const Napi::CallbackInfo& info) {
 
   int32_t identifier = info[0].As<Napi::Number>();
   uint8_t* data = info[1].As<Napi::Buffer<uint8_t>>().Data();
+  int32_t dlc = info[2].As<Napi::Number>();
 
-  canStatus status = canWrite(this->handle, identifier, data, sizeof(data), 0);
+  canStatus status = canWrite(this->handle, identifier, data, dlc, 0);
   CanApi::CheckCanStatus("SendMessage::canWrite", status);
 
   return Napi::Boolean::New(env, true);
