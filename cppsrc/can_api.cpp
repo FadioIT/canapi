@@ -64,7 +64,7 @@ Napi::Value CanApi::ReadMessage(const Napi::CallbackInfo& info) {
   long identifier;
   uint32_t  dlc;
   uint32_t flags;
-  uint8_t* data;
+  BYTE data[8];
   DWORD time;
 
   status = canReadWait(this->handle, &identifier, data, &dlc, &flags, &time, 3000);
