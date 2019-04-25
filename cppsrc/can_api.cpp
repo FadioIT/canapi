@@ -7,14 +7,20 @@
 
 Napi::FunctionReference CanApi::constructor;
 
-void CanApi::CheckCanStatus(char* label, canStatus status) {
-  if (status != canOK) {
-    char buffer[50];
-    buffer[0] = '\0';
-
-    canGetErrorText(status, buffer, sizeof(buffer));
-
-    printf("%s => failed, stat=%d (%s)\n", label, (int)status, buffer);
+bool CanApi::CheckCanStatus(char* label, canStatus status) {
+  switch(status) {
+    case canOK:
+      printf("canOK");
+      return true;
+      break;
+    case canERR_NOMSG:
+      printf("canERR_NOMSG");
+      return true;
+      break;
+    default:
+      printf("ERROR %s() FAILED, Err= %d <line: %d>\n", label, status, __LINE__);
+      return false;
+      break;
   }
 }
 
@@ -62,13 +68,17 @@ Napi::Value CanApi::ReadMessage(const Napi::CallbackInfo& info) {
 
   canStatus status; 
   long identifier;
-  uint32_t  dlc;
+  uint32_t dlc;
   uint32_t flags;
   BYTE data[8];
   DWORD time;
 
-  status = canReadWait(this->handle, &identifier, data, &dlc, &flags, &time, 3000);
-  CanApi::CheckCanStatus("ReadMessage::canReadWait", status);
+  status = canRead(this->handle, &identifier, data, &dlc, &flags, &time);
+  bool messageOk = CanApi::CheckCanStatus("ReadMessage::canRead", status);
+
+  if (!messageOk) {
+    return Napi::Boolean::New(env, false);
+  }
 
   Napi::Object output = Napi::Object::New(env);
 

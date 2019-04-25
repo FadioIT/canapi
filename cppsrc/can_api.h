@@ -12,7 +12,7 @@ class CanApi : public Napi::ObjectWrap<CanApi> {
 
   private:
     static Napi::FunctionReference constructor;
-    static void CheckCanStatus(char* label, canStatus status);
+    static bool CheckCanStatus(char* label, canStatus status);
 
     Napi::Value SendMessage(const Napi::CallbackInfo& info);
     Napi::Value ReadMessage(const Napi::CallbackInfo& info);

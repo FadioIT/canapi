@@ -18,7 +18,7 @@
       "dependencies": ["<!(node -p \"require('node-addon-api').gyp\")"],
       "cflags": ["-Wall -Werror -Wno-unused"],
       "cflags_cc": ["-fexceptions"],
-      "defines": ["NAPI_DISABLE_CPP_EXCEPTIONS"]
+      "defines": ["NAPI_CPP_EXCEPTIONS"]
     }
   ]
 }
