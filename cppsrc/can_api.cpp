@@ -15,7 +15,7 @@ bool CanApi::CheckCanStatus(char* label, canStatus status) {
       break;
     case canERR_NOMSG:
       printf("canERR_NOMSG");
-      return true;
+      return false;
       break;
     default:
       printf("ERROR %s() FAILED, Err= %d <line: %d>\n", label, status, __LINE__);
