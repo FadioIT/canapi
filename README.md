@@ -60,6 +60,10 @@ myChannel.sendMessage(731, CanApi.createBuffer([180, 20, 180, 2]), 4);
 
 Read message from the CAN channel.
 
+| Input param      | Type     | Description                                                                      |
+| ---------------- | -------- | -------------------------------------------------------------------------------- |
+| `Object.timeout` | `number` | the number of milliseconds to wait for a message before returning (default: `0`) |
+
 **Returns**: `Object`
 
 | Output param        | Type     | Description                               |
@@ -71,7 +75,7 @@ Read message from the CAN channel.
 **Example**:
 
 ```js
-const message = myChannel.readMessage();
+const message = myChannel.readMessage({ timeout: 3000 });
 
 console.log({
   identifier: message.identifier,
