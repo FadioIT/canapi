@@ -21,8 +21,16 @@ const CanApiWrapper = function (channel, bitRate = bitRates.canBITRATE_500K) {
   };
 
   return {
-    readMessage: (...args) => {
-      return ifWinPlatformExecute("readMessage", undefined, ...args);
+    readMessage: (options = {}) => {
+      const defaultOptions = {
+        timeout: 0,
+      };
+
+      return ifWinPlatformExecute(
+        "readMessage",
+        false,
+        Object.assign({}, defaultOptions, options),
+      );
     },
     sendMessage: (...args) => {
       return ifWinPlatformExecute("sendMessage", true, ...args);

@@ -10,11 +10,9 @@ Napi::FunctionReference CanApi::constructor;
 bool CanApi::CheckCanStatus(char* label, canStatus status) {
   switch(status) {
     case canOK:
-      printf("canOK");
       return true;
       break;
     case canERR_NOMSG:
-      printf("canERR_NOMSG");
       return false;
       break;
     default:
@@ -65,6 +63,7 @@ CanApi::CanApi(const Napi::CallbackInfo& info): Napi::ObjectWrap<CanApi>(info) {
 
 Napi::Value CanApi::ReadMessage(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
+  Napi::Object options = info[0].As<Napi::Object>();
 
   canStatus status; 
   long identifier;
@@ -73,7 +72,14 @@ Napi::Value CanApi::ReadMessage(const Napi::CallbackInfo& info) {
   BYTE data[8];
   DWORD time;
 
-  status = canRead(this->handle, &identifier, data, &dlc, &flags, &time);
+  uint32_t optionTimeout = options.Get("timeout").As<Napi::Number>().Uint32Value();
+
+  if (optionTimeout > 0) {
+    status = canReadWait(this->handle, &identifier, data, &dlc, &flags, &time, optionTimeout);
+  } else {
+    status = canRead(this->handle, &identifier, data, &dlc, &flags, &time);
+  }
+
   bool messageOk = CanApi::CheckCanStatus("ReadMessage::canRead", status);
 
   if (!messageOk) {
