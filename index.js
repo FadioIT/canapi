@@ -1,19 +1,19 @@
-const isWinPlatfrom = process.platform === "win32";
+const isSupportedPlatform = process.platform !== 'darwin';
 
-let CanApi = function () { };
+let CanApi = function() {};
 
-if (isWinPlatfrom) {
-  CanApi = require("./build/Release/can_api.node").CanApi;
+if (isSupportedPlatform) {
+  CanApi = require('./build/Release/can_api.node').CanApi;
 }
 
-const createBuffer = require("./helpers/create_buffer");
-const bitRates = require("./helpers/bit_rates");
+const createBuffer = require('./helpers/create_buffer');
+const bitRates = require('./helpers/bit_rates');
 
-const CanApiWrapper = function (channel, bitRate = bitRates.canBITRATE_500K) {
+const CanApiWrapper = function(channel, bitRate = bitRates.canBITRATE_500K) {
   const CanApiInstance = new CanApi(channel, bitRate);
 
-  const ifWinPlatformExecute = (propertyName, defaultValue, ...args) => {
-    if (isWinPlatfrom) {
+  const ifSupportedPlatformExecute = (propertyName, defaultValue, ...args) => {
+    if (isSupportedPlatform) {
       return CanApiInstance[propertyName](...args);
     }
 
@@ -26,21 +26,21 @@ const CanApiWrapper = function (channel, bitRate = bitRates.canBITRATE_500K) {
         timeout: 0,
       };
 
-      return ifWinPlatformExecute(
-        "readMessage",
+      return ifSupportedPlatformExecute(
+        'readMessage',
         false,
         Object.assign({}, defaultOptions, options),
       );
     },
     sendMessage: (...args) => {
-      return ifWinPlatformExecute("sendMessage", true, ...args);
+      return ifSupportedPlatformExecute('sendMessage', true, ...args);
     },
     open: (...args) => {
-      return ifWinPlatformExecute("open", true, ...args);
+      return ifSupportedPlatformExecute('open', true, ...args);
     },
     close: (...args) => {
-      return ifWinPlatformExecute("close", false, ...args);
-    }
+      return ifSupportedPlatformExecute('close', false, ...args);
+    },
   };
 };
 
