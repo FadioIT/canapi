@@ -1,4 +1,3 @@
-#include <conio.h>
 #include <stdio.h>
 #include <napi.h>
 #include <thread>
@@ -69,8 +68,8 @@ Napi::Value CanApi::ReadMessage(const Napi::CallbackInfo& info) {
   long identifier;
   uint32_t dlc;
   uint32_t flags;
-  BYTE data[8];
-  DWORD time;
+  uint8_t data[8];
+  unsigned long time;
 
   uint32_t optionTimeout = options.Get("timeout").As<Napi::Number>().Uint32Value();
 
